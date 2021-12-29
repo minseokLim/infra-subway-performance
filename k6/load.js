@@ -17,7 +17,7 @@ const AGE = 20;
 
 export default function () {
     const before = new Date().getTime();
-    const T = 6 * 1.5;
+    const T = 3 * 1.5;
 
     let jsonHeaders = {
         headers: {
@@ -35,25 +35,13 @@ export default function () {
     let stationsPage = http.get(`${BASE_URL}/stations`, htmlHeaders);
     check(stationsPage, {'retrieved stationsPage': (obj) => obj != null});
 
-    // 지하철역 목록 조회
-    let stations = http.get(`${BASE_URL}/stations`, jsonHeaders).json();
-    check(stations, {'retrieved stations': (obj) => obj != null});
-
     // 경로 검색 화면
     let pathPage = http.get(`${BASE_URL}/path`, htmlHeaders);
     check(pathPage, {'retrieved pathPage': (obj) => obj != null});
 
-    // 경로 검색
-    let paths = http.get(`${BASE_URL}/paths/?source=1&target=2`, jsonHeaders).json();
-    check(paths, {'retrieved paths': (obj) => obj != null});
-
     // 노선 조회 화면
     let linesPage = http.get(`${BASE_URL}/lines`, htmlHeaders);
     check(linesPage, {'retrieved linesPage': (obj) => obj != null});
-
-    // 노선 조회
-    let lines = http.get(`${BASE_URL}/lines`, jsonHeaders).json();
-    check(lines, {'retrieved lines': (obj) => obj != null});
 
     const after = new Date().getTime();
     const diff = (after - before) / 1000;
